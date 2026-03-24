@@ -1,0 +1,90 @@
+megevoy-plan/                              # Корневая папка проекта
+│
+├── src/                                    # Исходный код приложения
+│   ├── __init__.py                          # Отмечает папку как пакет Python
+│   ├── main.py                              # Точка входа в приложение: инициализация БД, запуск GUI
+│   │
+│   ├── models/                               # Модели данных (SQLAlchemy ORM)
+│   │   ├── __init__.py                        # Экспорт всех моделей для удобного импорта
+│   │   ├── base.py                            # Базовый класс Base с полями id, created_at, updated_at
+│   │   ├── dictionaries.py                     # Классы справочников: LandCategory, AllowedUse, Region,
+│   │   │                                        # GeopointMethod, EncumbranceType, DocumentType
+│   │   ├── project.py                          # Класс Project (проект межевания)
+│   │   ├── engineer.py                         # Класс CadastralEngineer (кадастровый инженер)
+│   │   ├── customer.py                         # Класс Customer (заказчик)
+│   │   ├── parcel.py                           # Класс Parcel (земельный участок) и перечисление ParcelStatus
+│   │   ├── point.py                            # Класс CharacteristicPoint (характерная точка)
+│   │   ├── contour.py                          # Класс Contour (контур многоконтурного участка)
+│   │   ├── adjacency.py                        # Класс Adjacency (смежный участок)
+│   │   └── encumbrance.py                      # Класс ParcelPart (часть участка / обременение)
+│   │
+│   ├── services/                              # Бизнес-логика (сервисы)
+│   │   ├── __init__.py
+│   │   ├── project_service.py                   # Операции с проектами (CRUD)
+│   │   ├── geometry_service.py                   # Геометрические вычисления (площадь, замкнутость, пересечения)
+│   │   ├── xml_service.py                        # Генерация XML-документа межевого плана (класс XMLGenerator)
+│   │   ├── import_service.py                     # Импорт координат из CSV и KML
+│   │   ├── export_service.py                     # Экспорт проекта в XML и координат в CSV
+│   │   └── validation_service.py                 # Валидация XML по XSD-схеме (класс ValidationService)
+│   │
+│   ├── gui/                                    # Графический интерфейс (PySide6)
+│   │   ├── __init__.py
+│   │   ├── main_window.py                        # Главное окно приложения (MainWindow)
+│   │   ├── dialogs/                              # Диалоговые окна
+│   │   │   ├── __init__.py
+│   │   │   ├── project_dialog.py                  # Диалог создания/редактирования проекта
+│   │   │   ├── parcel_dialog.py                    # Диалог редактирования земельного участка
+│   │   │   ├── point_dialog.py                     # Диалог редактирования характерной точки
+│   │   │   └── customer_engineer_dialog.py         # Управление справочниками (инженеры, заказчики)
+│   │   └── widgets/                              # Пользовательские виджеты
+│   │       ├── __init__.py
+│   │       ├── parcel_table.py                    # Модель таблицы участков (ParcelTableModel)
+│   │       └── coordinate_table.py                # Таблица для редактирования координат (CoordinateTable)
+│   │
+│   ├── utils/                                   # Вспомогательные утилиты
+│   │   ├── __init__.py
+│   │   ├── logger.py                              # Настройка логирования (файл + консоль)
+│   │   ├── config.py                              # Конфигурационные константы (пути, URL БД)
+│   │   ├── constants.py                           # Общие константы (длины полей, допуски, коды по умолчанию)
+│   │   └── init_db.py                             # Инициализация БД: создание таблиц, загрузка справочников,
+│   │                                                создание демо-данных
+│   │
+│   └── resources/                               # Статические ресурсы (не являются пакетом Python)
+│       ├── schemas/                               # XML-схемы Росреестра
+│       │   ├── MP_v09.xsd                          # Главная схема межевого плана
+│       │   ├── _AddressInp_v12.xsd                 # Подсхема адреса
+│       │   ├── _CadastralEngineer_v08.xsd          # Подсхема кадастрового инженера
+│       │   ├── _Spatial_v11.xsd                    # Подсхема пространственных данных
+│       │   └── ... (остальные файлы схем)
+│       └── dictionaries/                          # JSON-файлы справочников
+│           ├── categories.json                      # Категории земель
+│           ├── allowed_use.json                     # Виды разрешённого использования
+│           ├── regions.json                         # Субъекты РФ
+│           ├── methods.json                         # Методы определения координат
+│           ├── encumbrances.json                    # Типы обременений
+│           └── documents.json                       # Типы документов
+│
+├── tests/                                      # Тесты
+│   ├── __init__.py
+│   ├── conftest.py                              # Фикстуры pytest (база данных в памяти, тестовые объекты)
+│   ├── test_models/                             # Модульные тесты моделей
+│   │   ├── __init__.py
+│   │   ├── test_parcel.py
+│   │   ├── test_project.py
+│   │   └── ...
+│   ├── test_services/                           # Модульные тесты сервисов
+│   │   ├── __init__.py
+│   │   ├── test_geometry.py
+│   │   ├── test_xml_generation.py
+│   │   ├── test_import_export.py
+│   │   └── ...
+│   ├── test_integration/                         # Интеграционные тесты
+│   │   ├── __init__.py
+│   │   └── test_full_flow.py                     # Полный цикл: создание проекта -> экспорт -> валидация
+│   └── test_functional/                          # Функциональные тесты GUI (pytest-qt)
+│       ├── __init__.py
+│       └── test_main_window.py                    # Тесты главного окна и диалогов
+│
+├── requirements.txt                            # Зависимости Python (PySide6, SQLAlchemy, lxml, Shapely, pytest и др.)
+├── README.md                                   # Описание проекта, инструкции по установке и запуску
+└── .gitignore                                  # Исключённые файлы (база данных, логи, кеш Python)

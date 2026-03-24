@@ -1,0 +1,75 @@
+2026-02-28 15:23:07,898 [INFO] __main__: Запуск приложения «Межевой план»
+2026-02-28 15:23:07,948 [INFO] __main__: Подключение к БД: sqlite:///megevoy.db
+2026-02-28 15:23:08,149 [INFO] src.utils.init_db: Таблицы базы данных созданы (или уже существовали)
+2026-02-28 15:23:08,200 [ERROR] src.utils.init_db: Ошибка загрузки файла categories.json: [Errno 2] No such file or directory: 'C:\\Users\\AbramovSergeyN\\Downloads\\megevoy-plan\\resources\\dictionaries\\categories.json'
+Traceback (most recent call last):
+  File "C:\Users\AbramovSergeyN\Downloads\megevoy-plan\src\utils\init_db.py", line 49, in load_json
+    with open(filepath, 'r', encoding='utf-8') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\AbramovSergeyN\\Downloads\\megevoy-plan\\resources\\dictionaries\\categories.json'
+2026-02-28 15:23:08,203 [INFO] src.utils.init_db: Таблица land_categories заполнена 0 записями из categories.json
+2026-02-28 15:23:08,208 [ERROR] src.utils.init_db: Ошибка загрузки файла allowed_use.json: [Errno 2] No such file or directory: 'C:\\Users\\AbramovSergeyN\\Downloads\\megevoy-plan\\resources\\dictionaries\\allowed_use.json'
+Traceback (most recent call last):
+  File "C:\Users\AbramovSergeyN\Downloads\megevoy-plan\src\utils\init_db.py", line 49, in load_json
+    with open(filepath, 'r', encoding='utf-8') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\AbramovSergeyN\\Downloads\\megevoy-plan\\resources\\dictionaries\\allowed_use.json'
+2026-02-28 15:23:08,209 [INFO] src.utils.init_db: Таблица allowed_uses заполнена 0 записями из allowed_use.json
+2026-02-28 15:23:08,212 [ERROR] src.utils.init_db: Ошибка загрузки файла regions.json: [Errno 2] No such file or directory: 'C:\\Users\\AbramovSergeyN\\Downloads\\megevoy-plan\\resources\\dictionaries\\regions.json'
+Traceback (most recent call last):
+  File "C:\Users\AbramovSergeyN\Downloads\megevoy-plan\src\utils\init_db.py", line 49, in load_json
+    with open(filepath, 'r', encoding='utf-8') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\AbramovSergeyN\\Downloads\\megevoy-plan\\resources\\dictionaries\\regions.json'
+2026-02-28 15:23:08,213 [INFO] src.utils.init_db: Таблица regions заполнена 0 записями из regions.json
+2026-02-28 15:23:08,219 [ERROR] src.utils.init_db: Ошибка загрузки файла methods.json: [Errno 2] No such file or directory: 'C:\\Users\\AbramovSergeyN\\Downloads\\megevoy-plan\\resources\\dictionaries\\methods.json'
+Traceback (most recent call last):
+  File "C:\Users\AbramovSergeyN\Downloads\megevoy-plan\src\utils\init_db.py", line 49, in load_json
+    with open(filepath, 'r', encoding='utf-8') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\AbramovSergeyN\\Downloads\\megevoy-plan\\resources\\dictionaries\\methods.json'
+2026-02-28 15:23:08,221 [INFO] src.utils.init_db: Таблица geopoint_methods заполнена 0 записями из methods.json
+2026-02-28 15:23:08,223 [ERROR] src.utils.init_db: Ошибка загрузки файла encumbrances.json: [Errno 2] No such file or directory: 'C:\\Users\\AbramovSergeyN\\Downloads\\megevoy-plan\\resources\\dictionaries\\encumbrances.json'
+Traceback (most recent call last):
+  File "C:\Users\AbramovSergeyN\Downloads\megevoy-plan\src\utils\init_db.py", line 49, in load_json
+    with open(filepath, 'r', encoding='utf-8') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\AbramovSergeyN\\Downloads\\megevoy-plan\\resources\\dictionaries\\encumbrances.json'
+2026-02-28 15:23:08,225 [INFO] src.utils.init_db: Таблица encumbrance_types заполнена 0 записями из encumbrances.json
+2026-02-28 15:23:08,228 [ERROR] src.utils.init_db: Ошибка загрузки файла documents.json: [Errno 2] No such file or directory: 'C:\\Users\\AbramovSergeyN\\Downloads\\megevoy-plan\\resources\\dictionaries\\documents.json'
+Traceback (most recent call last):
+  File "C:\Users\AbramovSergeyN\Downloads\megevoy-plan\src\utils\init_db.py", line 49, in load_json
+    with open(filepath, 'r', encoding='utf-8') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\AbramovSergeyN\\Downloads\\megevoy-plan\\resources\\dictionaries\\documents.json'
+2026-02-28 15:23:08,229 [INFO] src.utils.init_db: Таблица document_types заполнена 0 записями из documents.json
+2026-02-28 15:23:08,234 [INFO] src.utils.init_db: Создание демо-инженера
+2026-02-28 15:23:08,244 [INFO] src.utils.init_db: Создание демо-заказчика
+2026-02-28 15:23:08,250 [INFO] src.utils.init_db: Создание демо-проекта
+2026-02-28 15:23:08,268 [INFO] src.utils.init_db: Демо-данные успешно созданы
+2026-02-28 15:23:08,268 [INFO] src.utils.init_db: Инициализация базы данных завершена
+2026-02-28 15:23:08,268 [INFO] __main__: База данных инициализирована
+2026-02-28 15:23:08,325 [DEBUG] src.services.project_service: Загружено 1 проектов
+2026-02-28 15:23:08,326 [DEBUG] src.gui.widgets.parcel_table: Модель таблицы обновлена: 1 участков
+2026-02-28 15:23:08,327 [INFO] src.gui.main_window: Главное окно инициализировано
+2026-02-28 15:24:24,039 [DEBUG] src.services.geometry_service: Проверка замкнутости: расстояние 0.000 м, результат True
+2026-02-28 15:24:24,053 [DEBUG] src.services.geometry_service: Вычислена площадь: 400.00 кв. м
+2026-02-28 15:25:13,430 [ERROR] src.services.export_service: Ошибка при экспорте проекта в XML: 'Parcel' object has no attribute 'address_postal_code'
+Traceback (most recent call last):
+  File "C:\Users\AbramovSergeyN\Downloads\megevoy-plan\src\services\export_service.py", line 46, in export_to_xml
+    generator.save(filepath)
+  File "C:\Users\AbramovSergeyN\Downloads\megevoy-plan\src\services\xml_service.py", line 502, in save
+    root = self.generate()
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\AbramovSergeyN\Downloads\megevoy-plan\src\services\xml_service.py", line 58, in generate
+    self._add_form_parcels(package)
+  File "C:\Users\AbramovSergeyN\Downloads\megevoy-plan\src\services\xml_service.py", line 107, in _add_form_parcels
+    self._add_new_parcel(form_parcels, parcel)
+  File "C:\Users\AbramovSergeyN\Downloads\megevoy-plan\src\services\xml_service.py", line 135, in _add_new_parcel
+    self._add_address(new, parcel)
+  File "C:\Users\AbramovSergeyN\Downloads\megevoy-plan\src\services\xml_service.py", line 194, in _add_address
+    if parcel.address_postal_code:  # предполагаем, что есть такое поле (в модели может отсутствовать)
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Parcel' object has no attribute 'address_postal_code'
+2026-02-28 15:25:24,473 [INFO] src.services.export_service: Координаты экспортированы в CSV: C:/Users/AbramovSergeyN/Downloads/megevoy-plan/export/test.csv
+2026-02-28 15:26:24,761 [INFO] __main__: Приложение завершено

@@ -1,0 +1,55 @@
+2026-02-28 14:58:05,994 [INFO] __main__: Запуск приложения «Межевой план»
+2026-02-28 14:58:06,044 [INFO] __main__: Подключение к БД: sqlite:///megevoy.db
+2026-02-28 14:58:06,050 [INFO] src.utils.init_db: Таблицы базы данных созданы (или уже существовали)
+2026-02-28 14:58:06,099 [ERROR] src.utils.init_db: Ошибка загрузки файла categories.json: [Errno 2] No such file or directory: 'C:\\Users\\AbramovSergeyN\\Downloads\\megevoy-plan\\resources\\dictionaries\\categories.json'
+Traceback (most recent call last):
+  File "C:\Users\AbramovSergeyN\Downloads\megevoy-plan\src\utils\init_db.py", line 41, in load_json
+    with open(filepath, 'r', encoding='utf-8') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\AbramovSergeyN\\Downloads\\megevoy-plan\\resources\\dictionaries\\categories.json'
+2026-02-28 14:58:06,101 [INFO] src.utils.init_db: Таблица land_categories заполнена 0 записями из categories.json
+2026-02-28 14:58:06,106 [ERROR] src.utils.init_db: Ошибка загрузки файла allowed_use.json: [Errno 2] No such file or directory: 'C:\\Users\\AbramovSergeyN\\Downloads\\megevoy-plan\\resources\\dictionaries\\allowed_use.json'
+Traceback (most recent call last):
+  File "C:\Users\AbramovSergeyN\Downloads\megevoy-plan\src\utils\init_db.py", line 41, in load_json
+    with open(filepath, 'r', encoding='utf-8') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\AbramovSergeyN\\Downloads\\megevoy-plan\\resources\\dictionaries\\allowed_use.json'
+2026-02-28 14:58:06,108 [INFO] src.utils.init_db: Таблица allowed_uses заполнена 0 записями из allowed_use.json
+2026-02-28 14:58:06,110 [ERROR] src.utils.init_db: Ошибка загрузки файла regions.json: [Errno 2] No such file or directory: 'C:\\Users\\AbramovSergeyN\\Downloads\\megevoy-plan\\resources\\dictionaries\\regions.json'
+Traceback (most recent call last):
+  File "C:\Users\AbramovSergeyN\Downloads\megevoy-plan\src\utils\init_db.py", line 41, in load_json
+    with open(filepath, 'r', encoding='utf-8') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\AbramovSergeyN\\Downloads\\megevoy-plan\\resources\\dictionaries\\regions.json'
+2026-02-28 14:58:06,111 [INFO] src.utils.init_db: Таблица regions заполнена 0 записями из regions.json
+2026-02-28 14:58:06,115 [ERROR] src.utils.init_db: Ошибка загрузки файла methods.json: [Errno 2] No such file or directory: 'C:\\Users\\AbramovSergeyN\\Downloads\\megevoy-plan\\resources\\dictionaries\\methods.json'
+Traceback (most recent call last):
+  File "C:\Users\AbramovSergeyN\Downloads\megevoy-plan\src\utils\init_db.py", line 41, in load_json
+    with open(filepath, 'r', encoding='utf-8') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\AbramovSergeyN\\Downloads\\megevoy-plan\\resources\\dictionaries\\methods.json'
+2026-02-28 14:58:06,118 [INFO] src.utils.init_db: Таблица geopoint_methods заполнена 0 записями из methods.json
+2026-02-28 14:58:06,121 [ERROR] src.utils.init_db: Ошибка загрузки файла encumbrances.json: [Errno 2] No such file or directory: 'C:\\Users\\AbramovSergeyN\\Downloads\\megevoy-plan\\resources\\dictionaries\\encumbrances.json'
+Traceback (most recent call last):
+  File "C:\Users\AbramovSergeyN\Downloads\megevoy-plan\src\utils\init_db.py", line 41, in load_json
+    with open(filepath, 'r', encoding='utf-8') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\AbramovSergeyN\\Downloads\\megevoy-plan\\resources\\dictionaries\\encumbrances.json'
+2026-02-28 14:58:06,122 [INFO] src.utils.init_db: Таблица encumbrance_types заполнена 0 записями из encumbrances.json
+2026-02-28 14:58:06,127 [ERROR] src.utils.init_db: Ошибка загрузки файла documents.json: [Errno 2] No such file or directory: 'C:\\Users\\AbramovSergeyN\\Downloads\\megevoy-plan\\resources\\dictionaries\\documents.json'
+Traceback (most recent call last):
+  File "C:\Users\AbramovSergeyN\Downloads\megevoy-plan\src\utils\init_db.py", line 41, in load_json
+    with open(filepath, 'r', encoding='utf-8') as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\AbramovSergeyN\\Downloads\\megevoy-plan\\resources\\dictionaries\\documents.json'
+2026-02-28 14:58:06,128 [INFO] src.utils.init_db: Таблица document_types заполнена 0 записями из documents.json
+2026-02-28 14:58:06,128 [INFO] src.utils.init_db: Инициализация базы данных завершена
+2026-02-28 14:58:06,128 [INFO] __main__: База данных инициализирована
+2026-02-28 14:58:06,354 [INFO] src.gui.main_window: Главное окно инициализировано
+2026-02-28 15:01:33,078 [ERROR] src.services.project_service: Инженер с ID None не найден
+2026-02-28 15:02:03,639 [INFO] src.gui.dialogs.customer_engineer_dialog: Добавлен инженер: Тест Тест Тест Тест
+2026-02-28 15:02:21,543 [INFO] src.gui.dialogs.customer_engineer_dialog: Добавлен заказчик: Тест Тест Тест
+2026-02-28 15:02:59,210 [INFO] src.services.project_service: Создан проект ID=1, name='Тест'
+2026-02-28 15:02:59,210 [DEBUG] src.gui.widgets.parcel_table: Модель таблицы обновлена: 0 участков
+2026-02-28 15:02:59,211 [INFO] src.gui.main_window: Создан проект 1
+2026-02-28 15:10:11,655 [INFO] __main__: Приложение завершено

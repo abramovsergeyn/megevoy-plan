@@ -1,0 +1,1059 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--Общие простые типы данных-->
+	<xs:include schemaLocation="P_AllSimpleType_v03.xsd"/>
+	<!--КЛАССИФИКАТОРЫ И СПРАВОЧНИКИ:-->
+	<xs:include schemaLocation="dGeopointOpred_v01.xsd"/>
+	<!--Версия 11:-->
+	<!--Изменение: в типе tSpelementUnitOKSInp исключен атрибут Note-->
+	<!--Изменен тип tSpecificMark.-->
+	<!--Редакция аннотаций-->
+	<!--====================================-->
+	<!--Код системы координат-->
+	<xs:simpleType name="d38_1">
+		<xs:annotation>
+			<xs:documentation>Число с ограничением длины до тридцати восьми цифр, в том числе одна цифра после запятой</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:decimal">
+			<xs:totalDigits value="38"/>
+			<xs:fractionDigits value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--Тип части элемента-->
+	<xs:simpleType name="sTypeUnit">
+		<xs:annotation>
+			<xs:documentation>Тип части элемента</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="Точка"/>
+			<xs:enumeration value="Окружность"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<!--Координата-->
+	<xs:complexType name="tOrdinateInp">
+		<xs:annotation>
+			<xs:documentation>Координата (новая, уточненная)</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="X" type="d38_2" use="required">
+			<xs:annotation>
+				<xs:documentation>Координата X</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Y" type="d38_2" use="required">
+			<xs:annotation>
+				<xs:documentation>Координата Y</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="NumGeopoint" type="p22" use="required">
+			<xs:annotation>
+				<xs:documentation>Номер точки</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DeltaGeopoint" type="d20_2">
+			<xs:annotation>
+				<xs:documentation>Средняя квадратическая погрешность определения координат</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PointPref" type="s30">
+			<xs:annotation>
+				<xs:documentation>Префикс номера точки</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="GeopointOpred" type="dGeopointOpred">
+			<xs:annotation>
+				<xs:documentation>Метод определения координат</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Formula" type="sNe4000">
+			<xs:annotation>
+				<xs:documentation>Формулы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tOrdinateXY">
+		<xs:annotation>
+			<xs:documentation>Координата (X, Y)</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="X" type="d38_2" use="required">
+			<xs:annotation>
+				<xs:documentation>Координата X</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Y" type="d38_2" use="required">
+			<xs:annotation>
+				<xs:documentation>Координата Y</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="NumGeopoint" type="p22">
+			<xs:annotation>
+				<xs:documentation>Номер точки</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tOrdinateInpZacrep">
+		<xs:annotation>
+			<xs:documentation>Координата (и закрепление точки)</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tOrdinateInp">
+				<xs:attribute name="GeopointZacrep" type="s120">
+					<xs:annotation>
+						<xs:documentation>Описание закрепления точки</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tOrdinateOKSDist">
+		<xs:annotation>
+			<xs:documentation>Координата (и величина глубины, высоты)</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tOrdinateInpOKS">
+				<xs:attribute name="H1" type="d23_1">
+					<xs:annotation>
+						<xs:documentation>Расстояние Н1</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="H2" type="d23_1">
+					<xs:annotation>
+						<xs:documentation>Расстояние Н2</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tOrdinateInpOKS">
+		<xs:annotation>
+			<xs:documentation>Координата (новая, уточненная) и радиус</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tOrdinateInp">
+				<xs:attribute name="R" type="d38_2">
+					<xs:annotation>
+						<xs:documentation>Радиус</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tOldOrdinateOKS">
+		<xs:annotation>
+			<xs:documentation>Значения координат, содержащиеся в ЕГРН</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tOrdinateXY">
+				<xs:attribute name="R" type="d38_2">
+					<xs:annotation>
+						<xs:documentation>Радиус</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tOrdinate">
+		<xs:annotation>
+			<xs:documentation>Координата (без метода определения)</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="X" type="d38_2" use="required">
+			<xs:annotation>
+				<xs:documentation>Координата X</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Y" type="d38_2" use="required">
+			<xs:annotation>
+				<xs:documentation>Координата Y</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="NumGeopoint" type="p22" use="required">
+			<xs:annotation>
+				<xs:documentation>Номер точки</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DeltaGeopoint" type="d20_2" use="required">
+			<xs:annotation>
+				<xs:documentation>Средняя квадратическая погрешность определения координат</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PointPref" type="s30">
+			<xs:annotation>
+				<xs:documentation>Префикс номера точки</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Formula" type="sNe4000">
+			<xs:annotation>
+				<xs:documentation>Формулы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!--Граница от точки до точки-->
+	<xs:complexType name="tBordersInp">
+		<xs:annotation>
+			<xs:documentation>Описание частей границ от точки до точки</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Border" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Часть границы от точки до точки</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tBorder">
+							<xs:sequence>
+								<xs:element name="Edge" type="tLength">
+									<xs:annotation>
+										<xs:documentation>Ребро</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tBorder">
+		<xs:annotation>
+			<xs:documentation>Обозначение части границы от точки до точки</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Spatial" type="p22" use="required">
+			<xs:annotation>
+				<xs:documentation>Порядковый номер элемента контура</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Point1" type="p22" use="required">
+			<xs:annotation>
+				<xs:documentation>Порядковый номер точки1 в элементе</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Point2" type="p22" use="required">
+			<xs:annotation>
+				<xs:documentation>Порядковый номер точки2 в элементе</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tLength">
+		<xs:annotation>
+			<xs:documentation>Горизонтальное проложение в метрах</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Length" type="d20_2" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Горизонтальное проложение в метрах</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Definition" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Описание прохождения части границы</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Граница от точки до точки и отметка о наличии земельного спора-->
+	<xs:complexType name="tBordersAgreement">
+		<xs:annotation>
+			<xs:documentation>Сведения о частях границ от точки до точки и отметка о наличии земельного спора</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Border" type="tBorderAgreement" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Часть границы от точки до точки и отметка о наличии земельного спора</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tBorderAgreement">
+		<xs:annotation>
+			<xs:documentation>Часть границы от точки до точки и отметка о наличии земельного спора</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tBorder">
+				<xs:sequence>
+					<xs:element name="Edge" type="tLength">
+						<xs:annotation>
+							<xs:documentation>Ребро</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="LandDispute">
+					<xs:annotation>
+						<xs:documentation>Сведения о согласовании местоположения границ</xs:documentation>
+					</xs:annotation>
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:pattern value="Согласовано
+"/>
+							<xs:pattern value="Спорное
+"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--Описание местоположения границ ЗУ (КМЗУ), ЧЗУ-->
+	<xs:complexType name="tEntitySpatialZUInp">
+		<xs:annotation>
+			<xs:documentation>Описание элементов контура (характерных точек контура) земельного участка, части земельного участка</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SpatialElement" type="tSpatialElementZUInp" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Элемент контура</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="CsCode" type="sSk_Code" use="required">
+			<xs:annotation>
+				<xs:documentation>Код системы координат</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Name" type="s2046">
+			<xs:annotation>
+				<xs:documentation>Наименование системы координат</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tSpatialElementZUInp">
+		<xs:annotation>
+			<xs:documentation>Элемент контура</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SpelementUnit" type="tSpelementUnitZUInp" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Часть элемента (точка)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tSpelementUnitZUInp">
+		<xs:annotation>
+			<xs:documentation>Часть элемента (точка)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Ordinate" type="tOrdinateInpZacrep">
+				<xs:annotation>
+					<xs:documentation>Координата</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="TypeUnit" use="required">
+			<xs:annotation>
+				<xs:documentation>Тип части элемента (точка)</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="sTypeUnit">
+					<xs:pattern value="Точка"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tEntitySpatialBordersZUInp">
+		<xs:annotation>
+			<xs:documentation>Описание местоположения характерных точек границ и частей границ (от точки до точки) земельного участка</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tEntitySpatialZUInp">
+				<xs:sequence>
+					<xs:element name="Borders" type="tBordersInp" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Описание частей границ (от точки до точки)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--===ОКС=====-->
+	<!--1. Описание местоположения контура ОКС (и расстояния H1 и H2)-->
+	<xs:complexType name="tEntitySpatialOKSDist">
+		<xs:annotation>
+			<xs:documentation>Описание элементов контура (характерных точек контура) здания, сооружения, объектов незавершенного строительства (и их частей)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SpatialElement" type="tSpatialElementOKSDist" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Элемент контура</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="CsCode" type="sSk_Code" use="required">
+			<xs:annotation>
+				<xs:documentation>Код системы координат</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Name" type="s2046">
+			<xs:annotation>
+				<xs:documentation>Наименование системы координат</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tSpatialElementOKSDist">
+		<xs:annotation>
+			<xs:documentation>Элемент контура</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SpelementUnit" type="tSpelementUnitOKSDist" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Часть элемента (точка, окружность)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="Underground" use="required">
+			<xs:annotation>
+				<xs:documentation>Тип контура (0- Наземный контур, 1 - Подземный контур, 2 - Надземный контур)</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="0"/>
+					<xs:enumeration value="1"/>
+					<xs:enumeration value="2"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tSpelementUnitOKSDist">
+		<xs:annotation>
+			<xs:documentation>Часть элемента (точка, окружность)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Ordinate" type="tOrdinateOKSDist">
+				<xs:annotation>
+					<xs:documentation>Координата</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="TypeUnit" type="sTypeUnit" use="required">
+			<xs:annotation>
+				<xs:documentation>Тип части элемента</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="SuNmb" type="p22" use="required">
+			<xs:annotation>
+				<xs:documentation>Номер части элемента (порядок обхода)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!--2. Описание местоположения контура ОКС (в т.ч. для нового контура) и метод определения-->
+	<xs:complexType name="tEntitySpatialOKS">
+		<xs:annotation>
+			<xs:documentation>Описание элементов контура (характерных точек контура) здания, сооружения, объекта незавершенного строительства (для нового контура)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SpatialElement" type="tSpatialElementOKS" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Элемент контура здания, сооружения, объекта незавершенного строительства (нового контура)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="CsCode" type="sSk_Code" use="required">
+			<xs:annotation>
+				<xs:documentation>Код системы координат</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Name" type="s2046">
+			<xs:annotation>
+				<xs:documentation>Наименование системы координат</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tSpatialElementOKS">
+		<xs:annotation>
+			<xs:documentation>Элемент контура здания,  сооружения, объекта незавершенного строительства (нового контура)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SpelementUnit" type="tSpelementUnitOKS" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Часть элемента (точка, окружность)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="Underground" use="required">
+			<xs:annotation>
+				<xs:documentation>Признак контура (0- Наземный контур, 1 - Подземный контур, 2 - Надземный контур)</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="0"/>
+					<xs:enumeration value="1"/>
+					<xs:enumeration value="2"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tSpelementUnitOKS">
+		<xs:annotation>
+			<xs:documentation>Часть нового элемента (точка, окружность)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Ordinate" type="tOrdinateInpOKS" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Координата</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="TypeUnit" type="sTypeUnit" use="required">
+			<xs:annotation>
+				<xs:documentation>Тип части элемента</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="SuNmb" type="p22" use="required">
+			<xs:annotation>
+				<xs:documentation>Номер части элемента (порядок обхода)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!--3. Описание местоположения контура ОКС (старые и новые координаты)-->
+	<xs:complexType name="tEntitySpatialOldNewOKS">
+		<xs:annotation>
+			<xs:documentation>Описание элементов контура (характерных точек контура) здания, сооружения, объекта незавершенного строительства (существующие и новые (уточненные) координаты</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SpatialElement" type="tSpatialElementOldNewOKS" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Элемент контура здания,  сооружения, объекта незавершенного строительства</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="CsCode" type="sSk_Code" use="required">
+			<xs:annotation>
+				<xs:documentation>Код системы координат</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Name" type="s2046">
+			<xs:annotation>
+				<xs:documentation>Наименование системы координат</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tSpatialElementOldNewOKS">
+		<xs:annotation>
+			<xs:documentation>Элемент контура здания,  сооружения, объекта незавершенного строительства</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SpelementUnit" type="tSpelementUnitOldNewOKS" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Часть элемента (точка, окружность)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="Underground" use="required">
+			<xs:annotation>
+				<xs:documentation>Признак контура (0- Наземный контур, 1 - Подземный контур, 2 - Надземный контур)</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="0"/>
+					<xs:enumeration value="1"/>
+					<xs:enumeration value="2"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tSpelementUnitOldNewOKS">
+		<xs:annotation>
+			<xs:documentation>Часть элемента (точка, окружность)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="OldOrdinate" type="tOldOrdinateOKS" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Существующая точка</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NewOrdinate" type="tOrdinateInpOKS" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Новая (уточненная) точка</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="TypeUnit" type="sTypeUnit" use="required">
+			<xs:annotation>
+				<xs:documentation>Тип части элемента</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="SuNmb" type="p22" use="required">
+			<xs:annotation>
+				<xs:documentation>Номер части элемента (порядок обхода)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!--4. Описание местоположения контура части ОКС-->
+	<xs:complexType name="tEntitySpatialOKSNote">
+		<xs:annotation>
+			<xs:documentation>Описание элементов контура (характерных точек контура) (для частей ОКС)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SpatialElement" type="tSpatialElementOKSNote" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Элемент контура</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="CsCode" type="sSk_Code" use="required">
+			<xs:annotation>
+				<xs:documentation>Код системы координат</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Name" type="s2046">
+			<xs:annotation>
+				<xs:documentation>Наименование системы координат</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tSpatialElementOKSNote">
+		<xs:annotation>
+			<xs:documentation>Элемент контура</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SpelementUnit" type="tSpelementUnitOKSNote" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Часть элемента (точка, окружность)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="Underground" use="required">
+			<xs:annotation>
+				<xs:documentation>Тип контура (0- Наземный контур, 1 - Подземный контур, 2 - Надземный контур)</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="0"/>
+					<xs:enumeration value="1"/>
+					<xs:enumeration value="2"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tSpelementUnitOKSNote">
+		<xs:annotation>
+			<xs:documentation>Часть элемента (точка, окружность)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Ordinate" type="tOrdinateInpNote">
+				<xs:annotation>
+					<xs:documentation>Координата</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="TypeUnit" type="sTypeUnit" use="required">
+			<xs:annotation>
+				<xs:documentation>Тип части элемента</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="SuNmb" type="p22" use="required">
+			<xs:annotation>
+				<xs:documentation>Номер части элемента (порядок обхода)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tOrdinateInpNote">
+		<xs:annotation>
+			<xs:documentation>Координата (и примечание)</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tOrdinateInp">
+				<xs:attribute name="Note" type="s1500">
+					<xs:annotation>
+						<xs:documentation>Примечание</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<!--===Общие для ЗУ и Границ====-->
+	<!--Описание элементов контура (характерных точек контура) при уточнении границ (новые (уточненные) и существующие точки):-->
+	<xs:complexType name="tEntitySpatialBordersOldNew">
+		<xs:annotation>
+			<xs:documentation>Описание местоположения уточняемых границ (новые (уточненные), существующие точки)</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tEntitySpatialOldNew">
+				<xs:sequence>
+					<xs:element name="Borders" type="tBordersInp" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Граница участка от точки до точки</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tEntitySpatialOldNew">
+		<xs:annotation>
+			<xs:documentation>Описание местоположения уточняемых границ (новые (уточненные), существующие точки)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SpatialElement" type="tSpatialElementOldNew" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Элемент контура</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="CsCode" type="sSk_Code" use="required">
+			<xs:annotation>
+				<xs:documentation>Код системы координат</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Name" type="s2046">
+			<xs:annotation>
+				<xs:documentation>Наименование системы координат</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tSpatialElementOldNew">
+		<xs:annotation>
+			<xs:documentation>Элемент контура</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SpelementUnit" type="tSpelementUnitOldNew" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Часть элемента (точка)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tSpelementUnitOldNew">
+		<xs:annotation>
+			<xs:documentation>Часть элемента (новая (уточненная) точка, существующая точка (при наличии в ГКН))</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="OldOrdinate" type="tOrdinateXY" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Существующая точка</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NewOrdinate" type="tOrdinateInpZacrep" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Новая точка</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="TypeUnit" use="required">
+			<xs:annotation>
+				<xs:documentation>Тип части элемента (точка)</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="sTypeUnit">
+					<xs:pattern value="Точка"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tSpelementUnitChangeBorder">
+		<xs:annotation>
+			<xs:documentation>Часть элемента (новая (уточненная) точка, существующая точка)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="OldOrdinate" type="tOrdinateXY" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Существующая точка</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NewOrdinate" type="tOrdinateInpZacrep" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Новая точка</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="TypeUnit" use="required">
+			<xs:annotation>
+				<xs:documentation>Тип части элемента (точка)</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="sTypeUnit">
+					<xs:pattern value="Точка"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<!--===Местоположение машино-места-->
+	<xs:complexType name="tSpecificMarksLocation">
+		<xs:annotation>
+			<xs:documentation>Сведения о координатах специальных меток</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SpecificMarks" type="tSpecificMarks">
+				<xs:annotation>
+					<xs:documentation>Сведения о координатах специальных меток</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="CsCode" type="sSk_Code" use="required">
+			<xs:annotation>
+				<xs:documentation>Код системы координат</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Name" type="s2046">
+			<xs:annotation>
+				<xs:documentation>Наименование системы координат</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tSpecificMarkDistances">
+		<xs:annotation>
+			<xs:documentation>Сведения о расстояниях от специальных меток до характерных точек границ машино-места</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SpecificMarkDistance" type="tSpecificMarkDistance" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Расстояние от специальной метки до характерной точки границы машино-места</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tSpecificMarkDistance">
+		<xs:annotation>
+			<xs:documentation>Расстояние от специальной метки до характерной точки границы машино-места</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="NumberMark" type="p22">
+				<xs:annotation>
+					<xs:documentation>Номер специальной метки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NumberPoint" type="p22">
+				<xs:annotation>
+					<xs:documentation>Номер характерной точки границы машино-места</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Distance" type="dPos20_2">
+				<xs:annotation>
+					<xs:documentation>Расстояние, м</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tCharacterPointDistances">
+		<xs:annotation>
+			<xs:documentation>Сведения о расстояниях между характерными точками границ машино-места</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CharacterPointDistance" type="tCharacterPointDistance" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Расстояние от точки до точки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tCharacterPointDistance">
+		<xs:annotation>
+			<xs:documentation>Расстояние от точки до точки</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="NumberPoint1" type="p22">
+				<xs:annotation>
+					<xs:documentation>Номер характерной точки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NumberPoint2" type="p22">
+				<xs:annotation>
+					<xs:documentation>Номер характерной точки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Distance" type="dPos20_2">
+				<xs:annotation>
+					<xs:documentation>Расстояние, м</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tSpecificMarks">
+		<xs:annotation>
+			<xs:documentation>Сведения о координатах специальных меток</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="SpecificMark" type="tSpecificMark" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Специальная метка</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tSpecificMark">
+		<xs:annotation>
+			<xs:documentation>Специальная метка</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MarkOrdinate" type="tMarkOrdinate">
+				<xs:annotation>
+					<xs:documentation>Координаты специальной метки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="TypeUnit" use="required">
+			<xs:annotation>
+				<xs:documentation>Тип части элемента (точка)</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="sTypeUnit">
+					<xs:pattern value="Точка"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tMarkOrdinate">
+		<xs:annotation>
+			<xs:documentation>Координаты точки</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="X" type="d38_2" use="required">
+			<xs:annotation>
+				<xs:documentation>Координата X</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Y" type="d38_2" use="required">
+			<xs:annotation>
+				<xs:documentation>Координата Y</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Number" type="p22" use="required">
+			<xs:annotation>
+				<xs:documentation>Номер точки</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="DeltaGeopoint" type="d20_2" use="required">
+			<xs:annotation>
+				<xs:documentation>Средняя квадратическая погрешность определения координат</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="PointPref" type="s30">
+			<xs:annotation>
+				<xs:documentation>Префикс номера точки</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Formula" type="sNe4000">
+			<xs:annotation>
+				<xs:documentation>Формулы</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tContoursLocationFlat">
+		<xs:annotation>
+			<xs:documentation>Описание характерных точек границ помещения</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CharacterPointsFlat" type="tCharacterPointsFlat">
+				<xs:annotation>
+					<xs:documentation>Сведения о характерных точках границ помещения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="CsCode" type="sSk_Code" use="required">
+			<xs:annotation>
+				<xs:documentation>Код системы координат</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Name" type="s2046">
+			<xs:annotation>
+				<xs:documentation>Наименование системы координат</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tCharacterPointFlat">
+		<xs:annotation>
+			<xs:documentation>Характерная точка границы</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="PointOrdinate" type="tMarkOrdinate">
+				<xs:annotation>
+					<xs:documentation>Координаты характерной точки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="TypeUnit" use="required">
+			<xs:annotation>
+				<xs:documentation>Тип части элемента (точка)</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="sTypeUnit">
+					<xs:pattern value="Точка"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tCharacterPointsFlat">
+		<xs:annotation>
+			<xs:documentation>Сведения о характерных точках границ помещения</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CharacterPointFlat" type="tCharacterPointFlat" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Характерная точка границы</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Уточнение участка (от точки до точки) линейного сооружения-->
+	<xs:complexType name="tChangeBordersLinear">
+		<xs:annotation>
+			<xs:documentation>Список характерных точек части (участка) линейного объекта от точки до точки (в случае реконструкции, переноса/сноса такой части (участка))</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ChangeBorderLinear" type="tChangeBorderLinear" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Часть (участок) линейного объекта от точки до точки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tChangeBorderLinear">
+		<xs:annotation>
+			<xs:documentation>Часть (участок) линейного объекта от точки до точки</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="ChangeOrdinate" type="tSpelementUnitChange" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Список координат от точки до точки одного участка (должен начинается и заканчивается координатами, которые содержатся в ЕГРН и не подлежат изменению)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="NumberRecord" type="p10">
+			<xs:annotation>
+				<xs:documentation>Порядковый номер контура</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Underground" use="required">
+			<xs:annotation>
+				<xs:documentation>Тип контура (0- Наземный контур, 1 - Подземный контур, 2 - Надземный контур)</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="0"/>
+					<xs:enumeration value="1"/>
+					<xs:enumeration value="2"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tSpelementUnitChange">
+		<xs:annotation>
+			<xs:documentation>Часть элемента (новая (уточненная) точка, существующая в ЕГРН точка)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="OldOrdinate" type="tOrdinateXY" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Существующая точка</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NewOrdinate" type="tOrdinateInp" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Новая точка</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="TypeUnit" use="required">
+			<xs:annotation>
+				<xs:documentation>Тип части элемента (точка)</xs:documentation>
+			</xs:annotation>
+			<xs:simpleType>
+				<xs:restriction base="sTypeUnit">
+					<xs:pattern value="Точка"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="SuNmb" type="p22" use="required">
+			<xs:annotation>
+				<xs:documentation>Номер части элемента (порядок обхода)</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--Номер справочника в ЕС УНСИ 188. Дата изменения 08.11.2022-->
+	<xs:simpleType name="dNetworkPoints">
+		<xs:annotation>
+			<xs:documentation>Сведения о состоянии (сохранности) наружного знака пункта геодезической сети, центра пункта геодезической сети, марки центра пункта геодезической сети</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="627001000000">
+				<xs:annotation>
+					<xs:documentation>Сохранился</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="627002000000">
+				<xs:annotation>
+					<!-- Предыдущее значение
+          <xs:documentation>Не обнаружен</xs:documentation> -->
+					<!-- Новое значение -->
+					<xs:documentation>Отсутствует</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="627003000000">
+				<xs:annotation>
+					<xs:documentation>Утрачен</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="627004000000">
+				<xs:annotation>
+					<xs:documentation>Разрушен (поврежден)</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:simpleType name="dForestCategoryProtective">
+		<xs:annotation>
+			<xs:documentation>Категории защитных лесов</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="236001000000">
+				<xs:annotation>
+					<xs:documentation>Леса, расположенные на особо охраняемых природных территориях</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="236002000000">
+				<xs:annotation>
+					<xs:documentation>Леса, расположенные в водоохранных зонах</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="236003000000">
+				<xs:annotation>
+					<xs:documentation>Леса, выполняющие функции защиты природных и иных объектов</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="236003001000">
+				<xs:annotation>
+					<xs:documentation>Леса, расположенные в первом и втором поясах зон санитарной охраны источников питьевого и хозяйственно-бытового водоснабжения</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="236003002000">
+				<xs:annotation>
+					<xs:documentation>Защитные полосы лесов, расположенные вдоль железнодорожных путей общего пользования, федеральных автомобильных дорог общего пользования, автомобильных дорог общего пользования, находящихся в собственности субъектов Российской Федерации</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="236003003000">
+				<xs:annotation>
+					<xs:documentation>Зеленые зоны</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="236003004000">
+				<xs:annotation>
+					<xs:documentation>Лесопарковые зоны</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="236003005000">
+				<xs:annotation>
+					<xs:documentation>Городские леса</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="236003006000">
+				<xs:annotation>
+					<xs:documentation>Леса, расположенные в первой, второй и третьей зонах округов санитарной (горно-санитарной) охраны лечебно-оздоровительных местностей и курортов</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="236004000000">
+				<xs:annotation>
+					<xs:documentation>Ценные леса</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="236004001000">
+				<xs:annotation>
+					<xs:documentation>Государственные защитные лесные полосы</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="236004002000">
+				<xs:annotation>
+					<xs:documentation>Противоэрозионные леса</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="236004003000">
+				<xs:annotation>
+					<xs:documentation>Леса, расположенные в пустынных, полупустынных, лесостепных, лесотундровых зонах, степях, горах</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="236004004000">
+				<xs:annotation>
+					<xs:documentation>Леса, имеющие научное или историческое значение</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="236004005000">
+				<xs:annotation>
+					<xs:documentation>Орехово-промысловые зоны</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="236004006000">
+				<xs:annotation>
+					<xs:documentation>Лесные плодовые насаждения</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="236004007000">
+				<xs:annotation>
+					<xs:documentation>Ленточные боры</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="236004008000">
+				<xs:annotation>
+					<xs:documentation>Запретные полосы лесов, расположенные вдоль водных объектов</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="236004009000">
+				<xs:annotation>
+					<xs:documentation>Нерестоохранные полосы лесов</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="236005000000">
+				<xs:annotation>
+					<xs:documentation>Иная категория</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

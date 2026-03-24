@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<!--Общие простые типы данных-->
+	<xs:include schemaLocation="P_AllSimpleType_v03.xsd"/>
+	<!--Справочник "Природные объекты"-->
+	<xs:include schemaLocation="dNaturalObjects_v01.xsd"/>
+	<!--Справочник "Целевое назначение лесов"-->
+	<xs:include schemaLocation="dForestUse_v01.xsd"/>
+	<!--Категории защитных лесов-->
+	<xs:include schemaLocation="dForestCategoryProtective_v01.xsd"/>
+	<!--СВЕДЕНИЯ О ЛЕСАХ:-->
+	<xs:complexType name="tForestUseParcel">
+		<xs:annotation>
+			<xs:documentation>Характеристика лесного участка</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Kind">
+				<xs:annotation>
+					<xs:documentation>Вид объекта</xs:documentation>
+				</xs:annotation>
+				<xs:simpleType>
+					<xs:restriction base="dNaturalObjects">
+						<xs:pattern value="233001000000"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Forestry" type="s1000" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование лесничества, участкового лесничества</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ForestUse" type="dForestUse" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Целевое назначение (категория) лесов</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="QuarterNumbers" type="tQuarterNumbers" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номера лесных кварталов</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="CodeProtectiveForest" type="dForestCategoryProtective" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Категория защитных лесов по классификатору</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tQuarterNumbers">
+		<xs:annotation>
+			<xs:documentation>Номера лесных кварталов</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="QuarterNumber" type="s1_255" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Номер лесного квартала</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tTaxationSeparations">
+		<xs:annotation>
+			<xs:documentation>Номера лесотаксационных выделов</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="TaxationSeparation" type="s1_255" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Номер лесотаксационного выдела</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

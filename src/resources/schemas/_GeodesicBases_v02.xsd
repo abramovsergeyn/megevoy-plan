@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<!--Общие простые типы данных-->
+	<xs:include schemaLocation="P_AllSimpleType_v03.xsd"/>
+	<!--Сведения о состоянии (сохранности) наружного знака пункта геодезической сети, центра пункта геодезической сети, марки центра пункта геодезической сети-->
+	<xs:include schemaLocation="dNetworkPoints_v02.xsd"/>
+	<!--Сведения о геодезической основе и средствах измерений-->
+	<xs:complexType name="tGeodesicBases">
+		<xs:annotation>
+			<xs:documentation>Сведения о пунктах геодезической сети</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="GeodesicBase" type="tSetOfPointCondition" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Пункт геодезической сети</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tSetOfPointCondition">
+		<xs:annotation>
+			<xs:documentation>Описание пункта геодезической сети</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tSetOfPoint">
+				<xs:sequence minOccurs="0">
+					<xs:element name="ConditionPoint">
+						<xs:annotation>
+							<xs:documentation>Сведения о состоянии наружного знака пункта, центра пункта и его марки</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="OutdoorPoint" type="tNetworkPoint">
+									<xs:annotation>
+										<xs:documentation>Наружный знак пункта</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="CenterPoint" type="tNetworkPoint">
+									<xs:annotation>
+										<xs:documentation>Центр пункта</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="Mark" type="tNetworkPoint">
+									<xs:annotation>
+										<xs:documentation>Марка центра пункта</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+							<xs:attribute name="AsOfDate" type="xs:date" use="required">
+								<xs:annotation>
+									<xs:documentation>Дата выполнения обследования при проведении кадастровых работ</xs:documentation>
+								</xs:annotation>
+							</xs:attribute>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="CsCode" type="sSk_Code">
+					<xs:annotation>
+						<xs:documentation>Код системы координат</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+				<xs:attribute name="Name" type="s2046">
+					<xs:annotation>
+						<xs:documentation>Наименование системы координат</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tSetOfPoint">
+		<xs:annotation>
+			<xs:documentation>Пункт геодезической сети</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="PType" type="sNe4000">
+				<xs:annotation>
+					<xs:documentation>Вид геодезической сети</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PName" type="sNe4000">
+				<xs:annotation>
+					<xs:documentation>Название пункта геодезической сети</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PKind" type="sNe4000">
+				<xs:annotation>
+					<xs:documentation>Тип знака (тип пункта геодезической сети)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="PKlass" type="sNe4000">
+				<xs:annotation>
+					<xs:documentation>Класс геодезической сети</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OrdX" type="d38_2">
+				<xs:annotation>
+					<xs:documentation>Координата Х</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="OrdY" type="d38_2">
+				<xs:annotation>
+					<xs:documentation>Координата Y</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tNetworkPoint">
+		<xs:annotation>
+			<xs:documentation>Сведения о состоянии наружного знака пункта, центра такого пункта и его марки</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="StateConservation" type="s500" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Сведения о состоянии (сохранности) пункта геодезической сети</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="NetworkPoints" type="dNetworkPoints" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Состояние (сохранность) по классификатору</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tMeansSurvey">
+		<xs:annotation>
+			<xs:documentation>Сведения о средствах измерений</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MeanSurvey" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Сведения о средстве измерений</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Name" type="sNe1500">
+							<xs:annotation>
+								<xs:documentation>Наименование и обозначение типа средства измерений - прибора (инструмента, аппаратуры)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Number" type="sNe255">
+							<xs:annotation>
+								<xs:documentation>Заводской или серийный номер средства измерений</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="CertificateVerification" type="sNe4000" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Реквизиты свидетельства о поверке прибора (инструмента, аппаратуры) и (или) срок действия поверки</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

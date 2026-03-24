@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="urn://x-artefacts-rosreestr-ru/commons/all-simple-type/3.0" xmlns:ns2="urn://x-artefacts-rosreestr-ru/commons/directories/all-documents/5.0.1" xmlns:ns3="urn://x-artefacts-rosreestr-ru/commons/directories/applied-file/1.0.1" elementFormDefault="qualified">
+	<!--Общие простые типы данных-->
+	<xs:include schemaLocation="P_AllSimpleType_v03.xsd"/>
+	<!--Справочник Все документы-->
+	<xs:include schemaLocation="dAllDocuments_v05.xsd"/>
+	<!--Справочник Виды приложенных файлов-->
+	<xs:include schemaLocation="dAppliedFiles_v01.xsd"/>
+	<!--ВЕРСИЯ 10:-->
+	<!--Подсхема "Документ"-->
+	<xs:complexType name="tDocumentWithoutAppliedFile">
+		<xs:annotation>
+			<xs:documentation>Реквизиты документа</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CodeDocument" type="dAllDocuments">
+				<xs:annotation>
+					<xs:documentation>Код документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Name" type="s500" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Series" type="s45" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Серия документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Number" type="sNe45">
+				<xs:annotation>
+					<xs:documentation>Номер документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Date" type="xs:date" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Дата выдачи (подписания) документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IssueOrgan" type="s500" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Организация, выдавшая документ. Автор документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Desc" type="s1000" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Особые отметки</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tDocumentWithoutApplied">
+		<xs:annotation>
+			<xs:documentation>Реквизиты документа</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="CodeDocument" type="dAllDocuments">
+				<xs:annotation>
+					<xs:documentation>Код документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Name" type="s500" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Наименование документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Series" type="s45" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Серия документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Number" type="sNe45" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Номер документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Date" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата выдачи (подписания) документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="IssueOrgan" type="s500" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Организация, выдавшая документ. Автор документа</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tDocument">
+		<xs:annotation>
+			<xs:documentation>Реквизиты документа с приложенным файлом в формате PDF, XML, ZIP</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tDocumentWithoutAppliedFile">
+				<xs:sequence>
+					<xs:element name="AppliedFile" type="tAppliedFileFormat" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Приложенный файл в формате PDF, XML, ZIP</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tDocumentAllFormat">
+		<xs:annotation>
+			<xs:documentation>Реквизиты документа с приложенным файлом или ссылкой на источник размещения</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tDocumentWithoutAppliedFile">
+				<xs:choice>
+					<xs:element name="AppliedFile" type="tAppliedFileFormat" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Приложенный файл</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="FileURI" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Ссылка на документ, размещенный на официальном сайте или в информационном ресурсе</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tDocumentAndPDF">
+		<xs:annotation>
+			<xs:documentation>Реквизиты документа с приложенным образом в формате PDF</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tDocumentWithoutAppliedFile">
+				<xs:sequence>
+					<xs:element name="AppliedFilePDF" type="tAppliedFilePDF" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Приложенный файл в формате PDF</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tRequiredDocumentAndPDF">
+		<xs:annotation>
+			<xs:documentation>Реквизиты документа с обязательным приложенным образом в формате PDF</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="tDocumentWithoutAppliedFile">
+				<xs:sequence>
+					<xs:element name="AppliedFilePDF" type="tAppliedFilePDF">
+						<xs:annotation>
+							<xs:documentation>Приложенный файл в формате PDF</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="tAppendix">
+		<xs:annotation>
+			<xs:documentation>Приложения (файлы в формате PDF, XML, ZIP)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="AppliedFiles" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Приложенные файлы</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="NumberAppendix" type="p10">
+							<xs:annotation>
+								<xs:documentation>Номер приложения</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="NameAppendix" type="sNe1000">
+							<xs:annotation>
+								<xs:documentation>Наименование приложения</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="AppliedFile" type="tAppliedFileFormat">
+							<xs:annotation>
+								<xs:documentation>Приложенный файл в формате PDF, XML, ZIP</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tAppliedFile">
+		<xs:annotation>
+			<xs:documentation>Приложенный файл</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Kind" type="dApplied_file" use="required">
+			<xs:annotation>
+				<xs:documentation>Вид файла по справочнику видов приложенных файлов</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Name" type="s500" use="required">
+			<xs:annotation>
+				<xs:documentation>Относительный путь к файлу с изображением\Имя файла с изображением</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tAppliedFilesFormat">
+		<xs:annotation>
+			<xs:documentation>Приложенные файлы в формате PDF, XML, ZIP</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="AppliedFile" type="tAppliedFileFormat" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Приложенный файл в формате PDF, XML, ZIP</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tAppliedFileFormat">
+		<xs:annotation>
+			<xs:documentation>Приложенный файл в формате PDF, XML, ZIP</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Kind" type="dApplied_file" use="required">
+			<xs:annotation>
+				<xs:documentation>Вид файла по справочнику видов приложенных файлов</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Name" type="sName500Format" use="required">
+			<xs:annotation>
+				<xs:documentation>Относительный путь к файлу\Имя файла</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tAppliedFilesPDF">
+		<xs:annotation>
+			<xs:documentation>Приложенные файлы в формате PDF</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="AppliedFile" type="tAppliedFilePDF" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Приложенный файл в формате PDF</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tAppliedFilePDF">
+		<xs:annotation>
+			<xs:documentation>Приложенный файл в формате PDF</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Kind" type="dApplied_file" use="required">
+			<xs:annotation>
+				<xs:documentation>Вид файла по справочнику видов приложенных файлов</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Name" type="sName500PDF" use="required">
+			<xs:annotation>
+				<xs:documentation>Относительный путь к файлу\Имя файла</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tAppliedFilesJPEG">
+		<xs:annotation>
+			<xs:documentation>Приложенные файлы в формате JPEG</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="AppliedFile" type="tAppliedFileJPEG" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Приложенный файл в формате JPEG</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tAppliedFileJPEG">
+		<xs:annotation>
+			<xs:documentation>Приложенный файл в формате JPEG</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Kind" type="dApplied_file" use="required">
+			<xs:annotation>
+				<xs:documentation>Вид файла по справочнику видов приложенных файлов</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Name" type="sName500JPG" use="required">
+			<xs:annotation>
+				<xs:documentation>Относительный путь к файлу с изображением\Имя файла с изображением</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tAppliedFileXML">
+		<xs:annotation>
+			<xs:documentation>Приложенный файл в формате XML</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Kind" type="dApplied_file" use="required">
+			<xs:annotation>
+				<xs:documentation>Вид файла по справочнику видов приложенных файлов</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Name" type="sName500XML" use="required">
+			<xs:annotation>
+				<xs:documentation>Относительный путь к файлу в формате XML\Имя файла в формате XML</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="tAppendixAnd3D">
+		<xs:annotation>
+			<xs:documentation>Приложения (в том числе 3D-модель объекта недвижимости)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="AppliedFiles" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Приложенные файлы</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="NumberAppendix" type="p10">
+							<xs:annotation>
+								<xs:documentation>Номер приложения</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="NameAppendix" type="sNe1000">
+							<xs:annotation>
+								<xs:documentation>Наименование приложения</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="AppliedFile" type="tAppliedFileFormatAnd3D">
+							<xs:annotation>
+								<xs:documentation>Приложенный файл (в том числе 3D-модель)</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tAppliedFileFormatAnd3D">
+		<xs:annotation>
+			<xs:documentation>Приложенный файл (в том числе 3D-модель)</xs:documentation>
+		</xs:annotation>
+		<xs:attribute name="Kind" type="dApplied_file" use="required">
+			<xs:annotation>
+				<xs:documentation>Вид файла по справочнику видов приложенных файлов</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+		<xs:attribute name="Name" type="sName500FormatAnd3D" use="required">
+			<xs:annotation>
+				<xs:documentation>Относительный путь к файлу\Имя файла</xs:documentation>
+			</xs:annotation>
+		</xs:attribute>
+	</xs:complexType>
+	<!--Сведения о документах (в том числе картографических)-->
+	<xs:complexType name="tDocumentsCartographic">
+		<xs:annotation>
+			<xs:documentation>Сведения о документах (в том числе картографических)</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Document" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Описание документа</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tDocument">
+							<xs:sequence>
+								<xs:element name="AdditionalMap" type="tAdditionalMap" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>Дополнительная информация к картографическому материалу</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tAdditionalMap">
+		<xs:annotation>
+			<xs:documentation>Дополнительная информация к картографическому материалу</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="Scale" type="sNe255">
+				<xs:annotation>
+					<xs:documentation>Масштаб соответствующего картографического произведения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DateMap" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Дата создания картографического произведения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="DateUpdate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Дата последнего обновления картографического произведения</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
